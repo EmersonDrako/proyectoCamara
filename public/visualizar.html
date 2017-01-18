@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title id="count"></title>
+		<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<!--<script src="http://localhost/ProyectoCamara/node_modules/socket.io/lib/socket.io.js"></script>-->
+	<script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+<div id="datss"></div>
+<div id="html">
+</div>
+
+
+<script >
+	var socket = io();
+ 
+var count = document.getElementById('count');
+var datos = document.getElementById('datss');
+    socket.on('user',function(data){
+        console.log("actualizando desde el servidor");
+                count.innerHTML="emitiendo("+(data.number-1)+ ")";
+  datos.innerHTML="persona conectadas ("+(data.number-1)+ ")";
+    });
+
+socket.on('user2',function(numero){
+	socket.on('stream',function(image){
+
+var datos="";
+
+var nombre="play";
+for (var i = 0; i < numero.number; i++) {
+	 datos+=("<img id='"+nombre+[++i]+"' src="+image+" style='width:100px; height:100px'>");
+   }
+	document.getElementById("html").innerHTML = datos;
+
+
+	
+
+
+
+});
+
+
+
+	});
+
+
+
+</script>
+
+</body>
+</html>

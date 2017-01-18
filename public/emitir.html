@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title ></title>
+	<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+	<!--<script src="http://localhost/ProyectoCamara/node_modules/socket.io/lib/socket.io.js"></script>-->
+	<script src="/socket.io/socket.io.js"></script>
+
+        <script src="http://www.babylonjs.com/babylon.js"></script>
+        <style>
+            html, body {
+                overflow: hidden;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            #renderCanvas {
+                width: 100%;
+                height: 100%;
+                touch-action: none;
+            }
+        </style>
+</head>
+<body>
+    <div id="canvasZone">
+        <canvas id="renderCanvas"></canvas>
+    </div>
+<video src="" id="video" style="display:none;"></video>
+<canvas id="preview"  style="display:none;" ></canvas>
+
+
+
+<script>
+
+
+
+
+
+        var canvas = document.getElementById("renderCanvas");
+        var engine = new BABYLON.Engine(canvas, true);
+
+            var video = document.createElement("video");
+            navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+            if (navigator.getUserMedia) {
+                navigator.getUserMedia({video: true}, handleVideo, videoError);
+            }
+            function handleVideo(stream) {
+                video.src = window.URL.createObjectURL(stream);
+            }
+            function videoError(e) {
+                // do something
+            }
+        
+        var createScene = function () {
+        
+            // This creates a basic Babylon Scene object (non-mesh)
+            var scene = new BABYLON.Scene(engine);
+        
+            // This creates and positions a free camera (non-mesh)
+            var camera = new BABYLON.ArcRotateCamera("Camera", -1, 0.5, 50, BABYLON.Vector3.Zero(), scene);
+        
+            // This targets the camera to scene origin
+            camera.setTarget(BABYLON.Vector3.Zero());
+        
+            // This attaches the camera to the canvas
+            camera.attachControl(canvas, true);
+        
+            // This creates a light, aiming 0,1,0 - to the sky (non-mesh)
+            var light = new BABYLON.HemisphericLight("light1", new BABYLON.Vector3(0, 1, 0), scene);
+        
+            // Default intensity is 1. Let's dim the light a small amount
+            light.intensity = 0.7;
+
+            var skybox = BABYLON.Mesh.CreateBox("skyBox", 6000.0, scene);
+var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
+skyboxMaterial.backFaceCulling = false;
+skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("textura/Cielo/TropicalSunnyDay", scene);
+skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
+skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
+skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);skybox.material = skyboxMaterial;
+//cielofin del cielo
+        
+
+
+
+            // Our built-in 'sphere' shape. Params: name, subdivs, size, scene
+            sphere = BABYLON.Mesh.CreateBox("sphere1", 15, scene, true);
+        
+            // Move the sphere upward 1/2 its height
+        
+            var mat = new BABYLON.StandardMaterial("mat", scene);
+        
+            var videoTexture = new BABYLON.VideoTexture("video", document.getElementById('video'), scene, false, true, 2);
+        
+            mat.diffuseTexture = videoTexture;
+            sphere.material = mat;
+        
+            scene.onPointerUp = function () {
+                videoTexture.video.play();
+            }
+
+
+
+
+
+
+
+
+            return scene;
+        
+        };
+        
+
+
+
+        var scene = createScene();
+
+        engine.runRenderLoop(function () {
+            scene.render();
+        });
+
+        // Resize
+        window.addEventListener("resize", function () {
+            engine.resize();
+        });
+    </script>
+
+
+
+<script src="load.js"></script>
+</body>
+</html>
