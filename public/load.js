@@ -1,4 +1,4 @@
-       var video = document.createElement("video"); 
+ var video = document.createElement("video"); 
 var vervideo = document.getElementById("preview");
 var context = vervideo.getContext("2d");
 vervideo.width=800;
@@ -31,14 +31,13 @@ context.drawImage(video,0,0,context.width,context.height);
 }
 
 $(function(){
-navigator.getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msgGetUserMedia);
-
-if (navigator.getUserMedia) {
-
-navigator.mediaDevices.getUserMedia({video:true, audio:false},loadCam,loadFail);
-
+navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+ 
+if (navigator.getUserMedia) {       
+	  navigator.getUserMedia({video:true, audio:false},loadCam,loadFail);
 
 }
+
 
 setInterval(function(){
 viewVideo(video,context);
