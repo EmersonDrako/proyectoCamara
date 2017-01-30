@@ -1,5 +1,5 @@
  var video = document.createElement("video"); 
-var vervideo = document.querySelector("preview");
+var vervideo = document.querySelector("#preview");
 var context = vervideo.getContext("2d");
 vervideo.width=800;
 vervideo.height=600;
