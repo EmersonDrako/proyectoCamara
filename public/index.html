@@ -2,13 +2,14 @@
 <html>
 <head>
 	<title ></title>
+ 
+
 	<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
 	<!--<script src="http://localhost/ProyectoCamara/node_modules/socket.io/lib/socket.io.js"></script>-->
 	<script src="/socket.io/socket.io.js"></script>
 
-        <script src="http://www.babylonjs.com/babylon.js"></script>
 <script src="/textura/html2canvas.js"></script>
-        
+               <script src="http://www.babylonjs.com/babylon.js"></script>    
         <style>
 html, body {
 overflow: hidden;
@@ -42,12 +43,13 @@ position:absolute;
 <div id="Menu">
 <p id="logger" style="background-color:white "></p>
  <!--<input id='botonFoto' type='button' value = 'Foto'></input>-->
+<button id="boton">Encender</button>
+<video src="" id="video" style="width:100px; height: 100px" autoplay></video>
 
-<video src="" id="video" style="width:100px; height: 100px " autoplay></video>
  </div>
 
-<canvas id="preview"  style="display:none;" ></canvas>
-        <canvas id="renderCanvas"></canvas>
+<canvas id="preview"  style="display:none;"  ></canvas>
+        <canvas id="renderCanvas" ></canvas>
 <script>
 
 
@@ -75,36 +77,6 @@ e.preventDefault();
 
 
 
-            var video = document.createElement("video"); 
-
-            navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
-            if (navigator.getUserMedia) {
-                navigator.getUserMedia({video: true}, handleVideo, videoError);
-            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            function handleVideo(stream) {
-                video.src = window.URL.createObjectURL(stream);
-            }
-
-            function videoError(e) {
-                // do something
-            }
         
         var createScene = function () {
         
