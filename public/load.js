@@ -1,10 +1,10 @@
-var canvas = document.getElementById("preview");
-var context = canvas.getContext("2d");
-canvas.width=800;
-canvas.height=600;
-context.width= canvas.width;
-context.height= canvas.height;
-var video = document.getElementById("video");
+       var video = document.createElement("video"); 
+var vervideo = document.getElementById("preview");
+var context = vervideo.getContext("2d");
+vervideo.width=800;
+vervideo.height=600;
+context.width= vervideo.width;
+context.height= vervideo.height;
 var socket = io();
 
  
@@ -14,6 +14,7 @@ function logger(msg){
 
 $("#logger").text(msg);
 }
+
 function loadCam(stream){
 	video.src = window.URL.createObjectURL(stream);
 logger('camara conectada');
@@ -26,14 +27,16 @@ logger('Camara no conectada por favor revice su camara');
 
 function viewVideo(video,context){
 context.drawImage(video,0,0,context.width,context.height);
-   	socket.emit('stream',canvas.toDataURL('image/webp'));
+   	socket.emit('stream',vervideo.toDataURL('image/webp'));
 }
 
 $(function(){
 navigator.getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msgGetUserMedia);
 
 if (navigator.getUserMedia) {
+	$("#boton").on('click', function(){
 navigator.getUserMedia({video:true, audio:false},loadCam,loadFail);
+	});
 
 }
 
