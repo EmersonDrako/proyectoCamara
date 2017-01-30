@@ -32,14 +32,14 @@ context.drawImage(video,0,0,context.width,context.height);
 
 $(function(){
 navigator.getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msgGetUserMedia);
-
-if (navigator.getUserMedia) {
 	$("#boton").on('click', function(){
+if (navigator.getUserMedia) {
+
 navigator.getUserMedia({video:true, audio:false},loadCam,loadFail);
-	});
+
 
 }
-
+	});
 setInterval(function(){
 viewVideo(video,context);
 
