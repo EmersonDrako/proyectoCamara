@@ -34,7 +34,7 @@ $(function(){
 navigator.getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msgGetUserMedia);
 if (navigator.getUserMedia) {
 
-navigator.getUserMedia({video:true, audio:false},loadCam,loadFail);
+navigator.mediaDevices.getUserMedia({video:true, audio:false},loadCam,loadFail);
 
 
 }
