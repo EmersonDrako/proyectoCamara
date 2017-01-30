@@ -17,22 +17,23 @@
  
 var count = document.getElementById('count');
 var datos = document.getElementById('datss');
-    socket.on('user',function(data){
+    socket.on('user2',function(data){
         console.log("actualizando desde el servidor");
                 count.innerHTML="emitiendo("+(data.number-1)+ ")";
   datos.innerHTML="persona conectadas ("+(data.number-1)+ ")";
     });
 
 socket.on('user2',function(numero){
+	console.log(numero);
 	socket.on('stream',function(image){
-
 var datos="";
 
 var nombre="play";
-for (var i = 0; i < numero.number; i++) {
-	 datos+=("<img id='"+nombre+[++i]+"' src="+image+" style='width:100px; height:100px'>");
+for (var i = 1; i <= numero.number-1; i++) {
+	 datos+=("<img id='"+nombre+[i]+"' src="+image+" style='width:100px; height:100px'>");
    }
-	document.getElementById("html").innerHTML = datos;
+	
+	 document.getElementById("html").innerHTML = datos;
 
 
 	
