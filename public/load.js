@@ -31,9 +31,9 @@ context.drawImage(video,0,0,context.width,context.height);
 }
 
 $(function(){
-navigator.getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msgGetUserMedia);
+navigator.mediaDevices.getUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msgGetUserMedia);
 
-if (navigator.getUserMedia) {
+if (navigator.mediaDevices.getUserMedia) {
 
 navigator.mediaDevices.getUserMedia({video:true, audio:false},loadCam,loadFail);
 
