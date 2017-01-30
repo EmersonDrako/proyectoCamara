@@ -31,10 +31,10 @@ context.drawImage(video,0,0,context.width,context.height);
 }
 
 $(function(){
-navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
  
-if (navigator.getUserMedia) {       
-	  navigator.getUserMedia({video:true, audio:false},loadCam,loadFail);
+if (navigator.getMedia) {       
+	  navigator.getMedia({video:true, audio:false},loadCam,loadFail);
 
 }
 
