@@ -30,10 +30,10 @@ context.drawImage(video,0,0,context.width,context.height);
    	socket.emit('stream',vervideo.toDataURL('image/webp'));
 }
 
-$(function(){
-navigator.getMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+window.onload = function () {
+navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
  
-if (navigator.getMedia) {       
+if (navigator.getUserMedia) {       
 	  navigator.getMedia({video:true, audio:false},loadCam,loadFail);
 
 }
@@ -43,4 +43,4 @@ setInterval(function(){
 viewVideo(video,context);
 
 },50);
-});
+};
