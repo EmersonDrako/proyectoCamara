@@ -2,13 +2,12 @@
 <html>
 <head>
 	<title ></title>
+	<script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
 	<!--<script src="http://localhost/ProyectoCamara/node_modules/socket.io/lib/socket.io.js"></script>-->
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.2/p5.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.2/addons/p5.dom.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+
         <script src="http://www.babylonjs.com/babylon.js"></script>
-       <script src="/textura/html2canvas.js"></script>
+<script src="/textura/html2canvas.js"></script>
         
         <style>
 html, body {
@@ -44,40 +43,14 @@ position:absolute;
 <p id="logger" style="background-color:white "></p>
  <!--<input id='botonFoto' type='button' value = 'Foto'></input>-->
 
-
+<video src="" id="video" style="width:100px; height: 100px "></video>
  </div>
 
-
+<canvas id="preview"  style="display:none;" ></canvas>
         <canvas id="renderCanvas"></canvas>
 <script>
-var socket = io();
-        var video;
-        var id;
-        
 
 
-
-        socket.on('stream', function(data){
-         
-        });
-
-
-        function setup() {
-            c = createCanvas(320, 240);
-            video = createCapture(VIDEO);
-            video.size(320, 240);
-            video.hide();
-            noStroke();
-        }
-
-        function draw(){
-            image(video, 0, 0, 320, 240);
-
-                socket.emit('stream',{captura:c.canvas.toDataURL()});
-
-       
-            
-        }
 /*
 
 $( document ).ready(function() {
@@ -94,16 +67,45 @@ e.preventDefault();
 });
   */
 
-/*
+
         var canvas = document.getElementById("renderCanvas");
         var engine = new BABYLON.Engine(canvas, true);
 
-  
+
+
+
+
+            var video = document.createElement("video"); 
+
+            navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+            if (navigator.getUserMedia) {
+                navigator.getUserMedia({video: true}, handleVideo, videoError);
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            function handleVideo(stream) {
+                video.src = window.URL.createObjectURL(stream);
+            }
+
+            function videoError(e) {
+                // do something
+            }
         
-
-
-
-
         var createScene = function () {
         
             // This creates a basic Babylon Scene object (non-mesh)
@@ -143,7 +145,7 @@ skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);skybox.material = sky
         
             var mat = new BABYLON.StandardMaterial("mat", scene);
         
-            var videoTexture = new BABYLON.VideoTexture("video", video, scene, false, true, 2);
+            var videoTexture = new BABYLON.VideoTexture("video", document.getElementById('video'), scene, false, true, 2);
         
             mat.diffuseTexture = videoTexture;
             sphere.material = mat;
@@ -176,11 +178,10 @@ skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);skybox.material = sky
         window.addEventListener("resize", function () {
             engine.resize();
         });
-        */
     </script>
 
 
 
-
+<script src="load.js"></script>
 </body>
 </html>
