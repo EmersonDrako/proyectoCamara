@@ -31,16 +31,16 @@ context.drawImage(video,0,0,context.width,context.height);
 }
 
 window.onload = function () {
-navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
- 
-if (navigator.getUserMedia) {       
-	  navigator.getMedia({video:true, audio:false},loadCam,loadFail);
+navigator.mediaDevices.getUserMedia = (navigator.mediaDevices.getUserMedia || navigator.mediaDevices.webkitGetUserMedia || navigator.mediaDevices.mozGetUserMedia || navigator.mediaDevices.msgGetUserMedia);
+
+if (navigator.mediaDevices.getUserMedia) {
+navigator.mediaDevices.getUserMedia({video:true, audio:false},loadCam,loadFail);
 
 }
-
 
 setInterval(function(){
 viewVideo(video,context);
 
 },50);
 };
+
