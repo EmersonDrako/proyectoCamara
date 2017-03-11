@@ -23,7 +23,7 @@ socket.broadcast.emit('stream', image);
 
  var visitas = 0;
  io.on('connection', function(socket){
-	  var clientIp = "hola"+socket.request.connection._peername.address;
+	  var clientIp = "hola"+socket.request.connection._peername;
       socket.broadcast.emit('prueba1', {ip: clientIp});
    visitas++;
    socket.emit('user2',{number: visitas});
